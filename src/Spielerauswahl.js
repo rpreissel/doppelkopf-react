@@ -1,26 +1,34 @@
-// Import styles used by our app
-require('normalize.css/normalize.css');
-require('./styles/styles.css');
 import React from 'react';
-import Router from 'react-router';
+import {Link} from 'react-router';
 
 
 export default class Spielerauswahl extends React.Component {
   constructor(props) {
     super(props);
 
+  }
 
-    this.state = {};
+  emitStateChanged() {
+    this.props.onStateChanged();
+  }
+
+  anzahlSpielerChanged(fuenfspieler) {
+    this.props.data.fuenfspieler=fuenfspieler;
+    this.emitStateChanged();
   }
 
   render() {
     return (
       <div>
-        <div>
+        <h2>
         Spielerauswahl
-        </div>
+        </h2>
+
+          <input type="checkbox" name="spieler" value="4" checked={!this.props.data.fuenfspieler} onChange={() => this.anzahlSpielerChanged(false)}/> 4 Spieler
+          <input type="checkbox" name="spieler" value="5" checked={this.props.data.fuenfspieler} onChange={() => this.anzahlSpielerChanged(true)}/> 5 Spieler
+
         <div>
-          <Router.Link to="main">Back</Router.Link>
+          <Link to="main">Back</Link>
         </div>
       </div>
     );
