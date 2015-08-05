@@ -10,13 +10,19 @@ export default class DoppelkopfApp extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {data: new DoppelkopfData()};
+    //localStorage.clear();
+
+    const dataString = localStorage.getItem('data');
+
+    this.state = {data: dataString ? JSON.parse(dataString) : new DoppelkopfData()};
 
     this.onStateChanged=this.onStateChanged.bind(this);
   }
 
   onStateChanged() {
     this.setState({data: this.state.data});
+
+    localStorage.setItem('data', JSON.stringify(this.state.data));
   }
 
   render() {

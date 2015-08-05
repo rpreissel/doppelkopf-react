@@ -28,8 +28,8 @@ export default class Spielerauswahl extends React.Component {
     for (var i = 1; i <= playerCount; i++) {
       const playerVar='spieler'+i;
       players.push(
-          <div>
-            Spieler {i}
+          <div key={i}>
+            <label>{'Spieler '+ i + ': '}</label>
             <input type="text" value={this.props.data[playerVar]} onChange={(event) => this.spielerNameChanged(playerVar,event.target.value)}/>
           </div>
       );
