@@ -1,10 +1,19 @@
 import React from 'react';
-
-// "Data"
-import cards from './cards.json';
+import Router from 'react-router';
 
 // Our application
-import GreetingCardApp from './GreetingCardApp';
+import DoppelkopfApp from './DoppelkopfApp';
+import Spielerauswahl from './Spielerauswahl';
+import Ergebnis from './Ergebnis';
 
 
-React.render(<GreetingCardApp cards={cards} />, document.getElementById('mount'));
+var routes = (
+    <Router.Route name='main' handler={DoppelkopfApp} path="/">
+        <Router.Route name='auswahl' path='auswahl' handler={Spielerauswahl}/>
+        <Router.Route name='ergebnis' path='ergebnis' handler={Ergebnis}/>
+    </Router.Route>
+);
+
+Router.run(routes, Router.HistoryLocation, (Root) => {
+    React.render(<Root/>, document.getElementById('mount'));
+});

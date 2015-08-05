@@ -1,14 +1,9 @@
 html {
-	/* This image will be displayed fullscreen */
-	background: url('./bg.jpg') no-repeat center center fixed;
-
 	/* Ensure the html element always takes up the full height of the browser window */
 	min-height: 100%;
 
 	/* The Magic */
 	background-size: cover;
-
-	text-align: center;
 }
 
 body {
@@ -17,68 +12,3 @@ body {
 	margin-top: 18px;
 }
 
-.GreetingCard {
-	background-color: rgba(17, 17, 17, .7);
-	color: white;
-	text-align: center;
-	display: inline-block;
-
-	margin: 0 auto 40px auto;
-	padding: 10px 0 10px 0;
-	font-family: 'Open Sans', sans-serif;
-
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
-	border-radius: 10px; /* future proofing */
-	-khtml-border-radius: 10px;
-}
-
-.GreetingCardTitle {
-	font-family: 'PT Sans', sans-serif;
-	font-size: 18px;
-	font-weight: 400;
-	font-style: normal;
-	text-transform: uppercase;
-	letter-spacing: 4px;
-	padding-right: 3%;
-	text-align: center;
-}
-
-.NavBar {
-	margin-top: 5px;
-}
-
-.NavBar > img {
-	padding: 4px 12px 4px 12px;
-}
-
-.Footer {
-	position: absolute;
-	bottom: 35px;
-	text-align: center;
-	width: 100%;
-}
-
-.FooterInner {
-	display: inline-block;
-	text-decoration: none;
-}
-
-.FooterInner:hover {
-	cursor: pointer;
-}
-
-.FooterInner-FooterLine {
-	font-family: 'PT Sans', sans-serif;
-	font-size: 16px;
-	font-weight: 400;
-	text-transform: uppercase;
-	letter-spacing: 2px;
-	color: white;
-	padding-top:5px;
-}
-.FooterInner-FooterLine-Selected {
-	text-decoration: underline;
-	color: rgba(17, 17, 17, .7);
-	font-weight: 700;
-}
