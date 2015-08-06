@@ -12,8 +12,23 @@ export default class Ergebnis extends React.Component {
     return (
       <div>
         <h2>
-        Spielverlauf
+          Spielverlauf
         </h2>
+
+        <div>
+          <table>
+            <thead>
+            {this.props.data.spielerIds.map((id) => {
+              return <th key={id}>{this.props.data.spielerWithId(id)}</th>;
+            })}
+            </thead>
+            <tbody>
+            <tr>
+              <td>Inhalt</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
         <div>
           <Link to="main">Zurück</Link>
         </div>

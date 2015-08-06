@@ -9,4 +9,27 @@ export default class DoppelkopfData {
     this.spieler5='Spieler5';
   }
 
+  get spielerCount() {
+    return this.fuenfspieler ? 5 : 4;
+  }
+
+  get spielerIds() {
+    const result=[0,1,2,3];
+    if(this.fuenfspieler) {
+      result.push(4);
+    }
+    return result;
+  }
+
+  spielerWithId(id) {
+    return this['spieler'+(id+1)];
+  }
+
+  changeSpielerWithId(id,name) {
+    this['spieler'+(id+1)]=name;
+  }
+
+  get spieler() {
+    return this.spielerIds.map((id) => this.spielerWithId(id));
+  }
 }
