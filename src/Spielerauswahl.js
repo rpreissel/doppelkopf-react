@@ -47,7 +47,7 @@ export default class Spielerauswahl extends React.Component {
         {players}
 
         <div>
-          <Link to="main">Back</Link>
+          <Link to="ergebnis">Starte Spiel</Link>
         </div>
       </div>
     );

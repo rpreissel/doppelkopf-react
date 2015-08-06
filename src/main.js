@@ -9,11 +9,12 @@ import Ergebnis from './Ergebnis';
 
 var routes = (
     <Router.Route name='main' handler={DoppelkopfApp} path="/">
-        <Router.Route name='auswahl' path='auswahl' handler={Spielerauswahl}/>
+        <Router.DefaultRoute handler={Spielerauswahl}/>
         <Router.Route name='ergebnis' path='ergebnis' handler={Ergebnis}/>
     </Router.Route>
 );
 
-Router.run(routes, Router.HistoryLocation, (Root) => {
+
+Router.run(routes,  Router.HashLocation, (Root) => {
     React.render(<Root/>, document.getElementById('mount'));
 });

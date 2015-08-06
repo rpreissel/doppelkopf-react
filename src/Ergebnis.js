@@ -11,11 +11,11 @@ export default class Ergebnis extends React.Component {
   render() {
     return (
       <div>
+        <h2>
+        Spielverlauf
+        </h2>
         <div>
-        Ergebnis
-        </div>
-        <div>
-          <Link to="main">Back</Link>
+          <Link to="main">Zurück</Link>
         </div>
       </div>
     );
