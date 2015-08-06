@@ -18,14 +18,22 @@ export default class Ergebnis extends React.Component {
         <div>
           <table>
             <thead>
-            {this.props.data.spielerIds.map((id) => {
-              return <th key={id}>{this.props.data.spielerWithId(id)}</th>;
-            })}
+              <tr>
+                <th>Nr.</th>
+                {this.props.data.spieler.map((spieler, id) => {
+                  return <th key={id}>{spieler}</th>
+                })}
+              </tr>
             </thead>
             <tbody>
-            <tr>
-              <td>Inhalt</td>
-            </tr>
+              {this.props.data.spiele.map((spiel,spielIndex) => {
+                return <tr key={spielIndex}>
+                  <td>{spielIndex+1}</td>
+                  {this.props.data.spielerIds.map((spielerId) => {
+                    return <td key={spielerId}>{this.props.data.spielstandForSpielerAndSpiel(spielerId,spielIndex)}</td>
+                  })}
+                </tr>
+              })}
             </tbody>
           </table>
         </div>

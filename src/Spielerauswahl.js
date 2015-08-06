@@ -33,10 +33,10 @@ export default class Spielerauswahl extends React.Component {
           <input type="checkbox" name="spieler" value="5" checked={this.props.data.fuenfspieler} onChange={() => this.anzahlSpielerChanged(true)}/> 5 Spieler
         </div>
         {
-          this.props.data.spielerIds.map((id)=> {
+          this.props.data.spieler.map((name,id)=> {
             return <div key={id}>
               <label>{'Spieler '+ (id+1) + ': '}</label>
-              <input type="text" value={this.props.data.spielerWithId(id)} onChange={(event) => this.spielerNameChanged(id,event.target.value)}/>
+              <input type="text" value={name} onChange={(event) => this.spielerNameChanged(id,event.target.value)}/>
             </div>
           })
         }
