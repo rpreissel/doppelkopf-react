@@ -2,7 +2,7 @@ import React from 'react';
 import {Link,RouteHandler} from 'react-router';
 
 import DoppelkopfData from './DoppelkopfData';
-import {PageHeader,ButtonToolbar,Button} from 'react-bootstrap';
+import {PageHeader,ButtonToolbar,Button,Panel} from 'react-bootstrap';
 
 export default class DoppelkopfApp extends React.Component {
   static contextTypes = {
@@ -38,15 +38,21 @@ export default class DoppelkopfApp extends React.Component {
   }
 
   render() {
+    const adminTitle = (
+      <h3>Administration</h3>
+    );
+
     return (
       <div>
         <PageHeader>Doppelkopf-App</PageHeader>
         <RouteHandler data={this.state.data} onStateChanged={this.onStateChanged}/>
-        <div>
-          <ButtonToolbar>
-            <Button bsStyle='danger' onClick={this.clearStorage}>Storage löschen</Button>
-          </ButtonToolbar>
-        </div>
+        <Panel header={adminTitle} bsStyle='warning'>
+          <div>
+            <ButtonToolbar>
+              <Button bsStyle='danger' onClick={this.clearStorage}>Storage löschen</Button>
+            </ButtonToolbar>
+          </div>
+        </Panel>
       </div>
     );
   }

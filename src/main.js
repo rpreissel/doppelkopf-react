@@ -7,13 +7,13 @@ import Router from 'react-router';
 // Our application
 import DoppelkopfApp from './DoppelkopfApp';
 import Spielerauswahl from './Spielerauswahl';
-import Ergebnis from './Ergebnis';
+import Spielverlauf from './Spielverlauf';
 
 
 var routes = (
     <Router.Route name='main' handler={DoppelkopfApp} path="/">
         <Router.DefaultRoute handler={Spielerauswahl}/>
-        <Router.Route name='ergebnis' path='ergebnis' handler={Ergebnis}/>
+        <Router.Route name='verlauf' path='verlauf' handler={Spielverlauf}/>
     </Router.Route>
 );
 

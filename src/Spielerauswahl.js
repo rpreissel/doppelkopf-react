@@ -51,7 +51,7 @@ export default class Spielerauswahl extends React.Component {
           </div>
 
           <div>
-            <Link className="btn btn-primary" to="ergebnis">Zum Spiel</Link>
+            <Link className="btn btn-primary" to="verlauf">Zum Spiel</Link>
           </div>
 
         </Panel>
