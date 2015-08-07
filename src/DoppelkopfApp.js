@@ -1,6 +1,3 @@
-// Import styles used by our app
-require('normalize.css/normalize.css');
-require('./styles/styles.css');
 import React from 'react';
 import {Link,RouteHandler} from 'react-router';
 

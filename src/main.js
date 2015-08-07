@@ -1,4 +1,5 @@
 require('bootstrap/dist/css/bootstrap.css');
+require('./styles/styles.css');
 
 import React from 'react';
 import Router from 'react-router';
