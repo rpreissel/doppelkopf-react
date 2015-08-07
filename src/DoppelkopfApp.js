@@ -2,6 +2,7 @@ import React from 'react';
 import {Link,RouteHandler} from 'react-router';
 
 import DoppelkopfData from './DoppelkopfData';
+import {PageHeader,ButtonToolbar,Button} from 'react-bootstrap';
 
 export default class DoppelkopfApp extends React.Component {
   static contextTypes = {
@@ -39,14 +40,13 @@ export default class DoppelkopfApp extends React.Component {
   render() {
     return (
       <div>
-        <h1>
-          Doppelkopf-App
-        </h1>
-
-        <div>
-          <button type="button" onClick={this.clearStorage}>Storage löschen</button>
-        </div>
+        <PageHeader>Doppelkopf-App</PageHeader>
         <RouteHandler data={this.state.data} onStateChanged={this.onStateChanged}/>
+        <div>
+          <ButtonToolbar>
+            <Button bsStyle='danger' onClick={this.clearStorage}>Storage löschen</Button>
+          </ButtonToolbar>
+        </div>
       </div>
     );
   }
