@@ -5,7 +5,7 @@
   "scripts": {
     "clean": "rm -rf dist/ public/dist/",
     "dist": "./node_modules/.bin/webpack --dist",
-    "devserver": "./node_modules/.bin/webpack-dev-server --progress --colors --hot --content-base public",
+    "devserver": "./node_modules/.bin/webpack-dev-server --progress --colors --hot --host=0.0.0.0 --content-base public",
     "lint": "./node_modules/.bin/eslint . --ext .js --ext .jsx"
   },
   "repository": {

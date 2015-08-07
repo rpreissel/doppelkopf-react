@@ -31,7 +31,7 @@ export default class Spielerauswahl extends React.Component {
     return (
       <div>
         <Panel header={title} bsStyle='info'>
-          <div>
+          <div className="form-group">
             <label className="checkbox-inline">
               <input type="checkbox" name="spieler" value="4" checked={!this.props.data.fuenfspieler} onChange={() => this.anzahlSpielerChanged(false)}/> 4 Spieler
             </label>
@@ -39,19 +39,19 @@ export default class Spielerauswahl extends React.Component {
               <input type="checkbox" name="spieler" value="5" checked={this.props.data.fuenfspieler} onChange={() => this.anzahlSpielerChanged(true)}/> 5 Spieler
             </label>
           </div>
-          <div className="form-inline">
+          <div className="form-inline form-group">
           {
             this.props.data.spieler.map((name,id)=> {
               return <div className="form-group" key={id}>
-                <label>{'Spieler '+ (id+1) + ': '}</label>
-                <input className="form-control" type="text" value={name} onChange={(event) => this.spielerNameChanged(id,event.target.value)}/>
+                <label className="player-label">{'Spieler '+ (id+1) + ': '}</label>
+                <input className="form-control player-input" type="text" value={name} onChange={(event) => this.spielerNameChanged(id,event.target.value)}/>
               </div>
             })
           }
           </div>
 
           <div>
-            <Link to="ergebnis">Starte Spiel</Link>
+            <Link className="btn btn-primary" to="ergebnis">Zum Spiel</Link>
           </div>
 
         </Panel>
