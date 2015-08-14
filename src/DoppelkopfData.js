@@ -10,9 +10,10 @@ export default class DoppelkopfData {
     this.spieler5='Spieler5';
 
     this.spiele=[];
+  }
 
-    this.spiele.push(new Spiel([0,1],2,2));
-    this.spiele.push(new Spiel([4,3],2,2));
+  addSpiel(spiel) {
+    this.spiele.push(spiel);
   }
 
   get spielerCount() {

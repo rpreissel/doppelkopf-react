@@ -11,6 +11,15 @@ export default class Spielverlauf extends React.Component {
 
   }
 
+  emitStateChanged() {
+    this.props.onStateChanged();
+  }
+
+  spielAbrechnen(spiel) {
+    this.props.data.addSpiel(spiel);
+    this.emitStateChanged();
+  }
+
   render() {
     const ergebnisTitle = (
       <h3>Spielverlauf</h3>
@@ -34,7 +43,7 @@ export default class Spielverlauf extends React.Component {
 
         <Panel header={eingabeTitle} bsStyle='info'>
           <div>
-            <SpielEingabe spieler={this.props.data.spieler} mitAussetzer={this.props.data.fuenfspieler}/>
+            <SpielEingabe spieler={this.props.data.spieler} mitAussetzer={this.props.data.fuenfspieler} onSpielAbrechnen={(spiel) => this.spielAbrechnen(spiel)}/>
           </div>
         </Panel>
 
