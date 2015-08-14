@@ -34,7 +34,7 @@ export default class Spielverlauf extends React.Component {
 
         <Panel header={eingabeTitle} bsStyle='info'>
           <div>
-            <SpielEingabe spieler={this.props.data.spieler}/>
+            <SpielEingabe spieler={this.props.data.spieler} mitAussetzer={this.props.data.fuenfspieler}/>
           </div>
         </Panel>
 
