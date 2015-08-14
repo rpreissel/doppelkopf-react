@@ -25,8 +25,8 @@ export default class ErgebnisTabelle extends React.Component {
           return <tr className="text-center" key={spielIndex}>
             <td>{spielIndex + 1}</td>
             {this.props.data.spielerIds.map((spielerId) => {
-              return <td className="text-center"
-                         key={spielerId}>{this.props.data.spielstandForSpielerAndSpiel(spielerId, spielIndex)}</td>
+              return (<td className="text-center"
+                         key={spielerId}>{this.props.data.spielstandForSpielerAndSpiel(spielerId, spielIndex)}</td>);
             })}
           </tr>
         })}
