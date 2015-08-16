@@ -20,3 +20,8 @@ body {
 .player-input {
 	margin-right: 15px;
 }
+
+div.row div.btn-toolbar {
+	margin-top: 15px;
+}
+

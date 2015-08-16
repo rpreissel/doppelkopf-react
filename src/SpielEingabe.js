@@ -102,18 +102,18 @@ export default class SpielEingabe extends React.Component {
           <label className="">Spielwert</label>
 
           <div className="row">
-            <div className="col-md-2">
+            <div className="col-sm-2">
               <input className="text-right" type="text" value={this.state.spielwert}
                      onChange={(event) => this.spielerWertChanged(event.target.value)}/>
             </div>
-            <div className="col-md-10">
-              <ButtonToolbar>
+          </div>
+            <div className="row">
+              <ButtonToolbar className="col-sm-8">
                 {[1,2,3,4,5,6,7,8].map((value)=> {
                   return (<Button key={value} bsStyle={'default'} onClick={() => this.spielerWertChanged(value)}>{value}</Button>);
                 })}
               </ButtonToolbar>
             </div>
-          </div>
         </div>
         <div>
           <ButtonToolbar>

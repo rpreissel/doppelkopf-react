@@ -43,7 +43,7 @@ export default class DoppelkopfApp extends React.Component {
     );
 
     return (
-      <div>
+      <div className="container-fluid">
         <PageHeader>Doppelkopf-App</PageHeader>
         <RouteHandler data={this.state.data} onStateChanged={this.onStateChanged}/>
         <Panel header={adminTitle} bsStyle='warning'>
