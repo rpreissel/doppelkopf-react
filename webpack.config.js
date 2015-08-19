@@ -4,10 +4,10 @@ var argv = require('yargs').argv;
 
 function babelLoaders() {
   if (argv.dist) {
-    return ['babel?stage=0'];
+    return ['babel?optional[]=runtime&stage=0'];
   }
 
-  return ['react-hot', 'babel?stage=0'];
+  return ['react-hot', 'babel?optional[]=runtime&stage=0'];
 }
 
 function entries() {

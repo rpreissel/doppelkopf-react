@@ -1,9 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {Panel} from 'react-bootstrap';
+import { connect } from 'react-redux';
+import * as actionCreators from './actions//ActionCreators';
+import { bindActionCreators } from 'redux';
 
-
-export default class Spielerauswahl extends React.Component {
+class Spielerauswahl extends React.Component {
   constructor(props) {
     super(props);
 
@@ -19,6 +21,7 @@ export default class Spielerauswahl extends React.Component {
   }
 
   spielerNameChanged(spielerId,name) {
+    this.props.actions.renamePlayer(spielerId,name);
     this.props.data.changeSpielerWithId(spielerId,name);
     this.emitStateChanged();
   }
@@ -59,3 +62,17 @@ export default class Spielerauswahl extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    players: state.players
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actionCreators, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Spielerauswahl);
