@@ -18,10 +18,6 @@ class Spielverlauf extends React.Component {
 
   }
 
-  emitStateChanged() {
-    this.props.onStateChanged();
-  }
-
   spielAbrechnen(spiel) {
     this.props.actions.addSpiel(spiel.gewinner,spiel.aussetzer,spiel.spielwert);
   }
@@ -49,7 +45,7 @@ class Spielverlauf extends React.Component {
 
         <Panel header={eingabeTitle} bsStyle='info'>
           <div>
-            <SpielEingabe spieler={this.props.data.spieler} mitAussetzer={this.props.data.fuenfspieler} onSpielAbrechnen={(spiel) => this.spielAbrechnen(spiel)}/>
+            <SpielEingabe spieler={this.props.players} mitAussetzer={this.props.fuenfSpieler} onSpielAbrechnen={(spiel) => this.spielAbrechnen(spiel)}/>
           </div>
         </Panel>
 
@@ -67,6 +63,7 @@ function mapStateToProps(state) {
   return {
     players:                      PlayersStore.getPlayers(state.players),
     spiele:                       state.games.get('results'),
+    fuenfSpieler:                 state.players.get('fuenfSpieler'),
     spielstandForSpielerAndSpiel: (spielerId, spielIndex) => SpieleStore.getSpielstandForSpielerAndSpiel(state.games,spielerId,spielIndex)
   };
 }
