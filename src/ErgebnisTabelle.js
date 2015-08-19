@@ -2,8 +2,15 @@ import React from 'react';
 import {Link} from 'react-router';
 import {Table} from 'react-bootstrap';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actionCreators from './actions//ActionCreators';
 
-export default class ErgebnisTabelle extends React.Component {
+import * as SpieleStore from './reducers/games';
+import * as PlayersStore from './reducers/players';
+
+
+class ErgebnisTabelle extends React.Component {
   constructor(props) {
     super(props);
 
@@ -15,18 +22,18 @@ export default class ErgebnisTabelle extends React.Component {
         <thead>
         <tr>
           <th className="text-center">Nr.</th>
-          {this.props.data.spieler.map((spieler, id) => {
+          {this.props.players.map((spieler, id) => {
             return <th className="text-center" key={id}>{spieler}</th>
           })}
         </tr>
         </thead>
         <tbody>
-        {this.props.data.spiele.map((spiel, spielIndex) => {
+        {this.props.spiele.map((spiel, spielIndex) => {
           return <tr className="text-center" key={spielIndex}>
             <td>{spielIndex + 1}</td>
-            {this.props.data.spielerIds.map((spielerId) => {
+            {this.props.players.map((spieler,spielerId) => {
               return (<td className="text-center"
-                         key={spielerId}>{this.props.data.spielstandForSpielerAndSpiel(spielerId, spielIndex)}</td>);
+                         key={spielerId}>{this.props.spielstandForSpielerAndSpiel(spielerId, spielIndex)}</td>);
             })}
           </tr>
         })}
@@ -35,3 +42,19 @@ export default class ErgebnisTabelle extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    players:                      PlayersStore.getPlayers(state.players),
+    spiele:                       state.games.get('results'),
+    spielstandForSpielerAndSpiel: (spielerId, spielIndex) => SpieleStore.getSpielstandForSpielerAndSpiel(state.games,spielerId,spielIndex)
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actionCreators, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ErgebnisTabelle);

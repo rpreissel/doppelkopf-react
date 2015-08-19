@@ -11,6 +11,15 @@ export function renamePlayer(playerId, name) {
 export function toggleFivePlayers(fivePlayers) {
   return {
     type:        ActionTypes.TOGGLE_FIVE_PLAYERS,
-    fivePlayers: fivePlayers,
+    fivePlayers: fivePlayers
+  };
+}
+
+export function addSpiel(gewinner,aussetzer,spielwert) {
+  return {
+    type:      ActionTypes.ADD_GAME,
+    gewinner:  gewinner,
+    aussetzer: aussetzer,
+    spielwert: spielwert
   };
 }

@@ -49,7 +49,7 @@ export default class Spielverlauf extends React.Component {
 
         <Panel header={ergebnisTitle} bsStyle='info'>
           <div>
-            <ErgebnisTabelle data={this.props.data}/>
+            <ErgebnisTabelle/>
           </div>
         </Panel>
       </div>

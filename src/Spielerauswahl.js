@@ -1,10 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {Panel} from 'react-bootstrap';
+
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
 import * as actionCreators from './actions//ActionCreators';
+
 import * as PlayersStore from './reducers/players';
 
 
