@@ -10,9 +10,9 @@ import thunk from 'redux-thunk';
 import * as reducers from './reducers/index';
 
 // Our application
-import DoppelkopfApp from './DoppelkopfApp';
-import Spielerauswahl from './Spielerauswahl';
-import Spielverlauf from './Spielverlauf';
+import DoppelkopfApp from './components/DoppelkopfApp';
+import Spielerauswahl from './components/Spielerauswahl';
+import Spielverlauf from './components/Spielverlauf';
 
 
 const reducer = combineReducers(reducers);

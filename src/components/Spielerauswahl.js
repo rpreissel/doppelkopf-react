@@ -4,9 +4,9 @@ import {Panel} from 'react-bootstrap';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actionCreators from './actions//ActionCreators';
+import * as actionCreators from '../actions//ActionCreators';
 
-import * as PlayersStore from './reducers/players';
+import * as PlayersStore from '../reducers/players';
 
 
 class Spielerauswahl extends React.Component {

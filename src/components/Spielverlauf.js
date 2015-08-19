@@ -6,10 +6,10 @@ import SpielEingabe from './SpielEingabe';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actionCreators from './actions//ActionCreators';
+import * as actionCreators from '../actions//ActionCreators';
 
-import * as SpieleStore from './reducers/games';
-import * as PlayersStore from './reducers/players';
+import * as SpieleStore from '../reducers/games';
+import * as PlayersStore from '../reducers/players';
 
 
 class Spielverlauf extends React.Component {
