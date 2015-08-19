@@ -18,10 +18,6 @@ class Spielverlauf extends React.Component {
 
   }
 
-  spielAbrechnen(spiel) {
-    this.props.actions.addSpiel(spiel.gewinner,spiel.aussetzer,spiel.spielwert);
-  }
-
   render() {
     const ergebnisTitle = (
       <h3>Spielverlauf</h3>
@@ -45,7 +41,7 @@ class Spielverlauf extends React.Component {
 
         <Panel header={eingabeTitle} bsStyle='info'>
           <div>
-            <SpielEingabe spieler={this.props.players} mitAussetzer={this.props.fuenfSpieler} onSpielAbrechnen={(spiel) => this.spielAbrechnen(spiel)}/>
+            <SpielEingabe spieler={this.props.players} mitAussetzer={this.props.fuenfSpieler} onSpielAbrechnen={this.props.actions.addSpiel}/>
           </div>
         </Panel>
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {ButtonToolbar,Button} from 'react-bootstrap';
-import Spiel from './Spiel';
 
 
 export default class SpielEingabe extends React.Component {
@@ -46,8 +45,7 @@ export default class SpielEingabe extends React.Component {
   }
 
   spielAbrechnen() {
-    let spiel=new Spiel(this.state.gewinner,this.state.aussetzer,this.state.spielwert);
-    this.props.onSpielAbrechnen(spiel);
+    this.props.onSpielAbrechnen(this.state.gewinner,this.state.aussetzer,this.state.spielwert);
 
     this.setState(this.createEmptyState());
   }

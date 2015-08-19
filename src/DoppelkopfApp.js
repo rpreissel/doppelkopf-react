@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link,RouteHandler} from 'react-router';
 
-import DoppelkopfData from './DoppelkopfData';
 import {PageHeader,ButtonToolbar,Button,Panel} from 'react-bootstrap';
 
 export default class DoppelkopfApp extends React.Component {
@@ -12,27 +11,26 @@ export default class DoppelkopfApp extends React.Component {
   constructor(props) {
     super(props);
 
-    const dataString = localStorage.getItem('data');
-    if(dataString) {
-      let oldState=JSON.parse(dataString);
-      oldState.__proto__ = DoppelkopfData.prototype;
-      this.state = {data: oldState};
-    } else {
-      this.state = {data: new DoppelkopfData()};
-    }
-
-    this.onStateChanged = this.onStateChanged.bind(this);
-    this.clearStorage=this.clearStorage.bind(this);
+    //const dataString = localStorage.getItem('data');
+    //if(dataString) {
+    //  let oldState=JSON.parse(dataString);
+    //  oldState.__proto__ = DoppelkopfData.prototype;
+    //  this.state = {data: oldState};
+    //} else {
+    //  this.state = {data: new DoppelkopfData()};
+    //}
+    //
+    //this.clearStorage=this.clearStorage.bind(this);
   }
 
-  onStateChanged() {
-    this.setState({data: this.state.data});
-    localStorage.setItem('data', JSON.stringify(this.state.data));
-  }
+  //onStateChanged() {
+  //  this.setState({data: this.state.data});
+  //  localStorage.setItem('data', JSON.stringify(this.state.data));
+  //}
 
   clearStorage() {
-    this.setState({data: new DoppelkopfData()});
-    localStorage.clear();
+    //this.setState({data: new DoppelkopfData()});
+    //localStorage.clear();
 
     this.context.router.transitionTo('main');
   }
@@ -45,7 +43,7 @@ export default class DoppelkopfApp extends React.Component {
     return (
       <div className="container-fluid">
         <PageHeader>Doppelkopf-App</PageHeader>
-        <RouteHandler data={this.state.data} onStateChanged={this.onStateChanged}/>
+        <RouteHandler/>
         <Panel header={adminTitle} bsStyle='warning'>
           <div>
             <ButtonToolbar>
