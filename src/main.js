@@ -14,12 +14,26 @@ import DoppelkopfApp from './components/DoppelkopfApp';
 import Spielerauswahl from './components/Spielerauswahl';
 import Spielverlauf from './components/Spielverlauf';
 
+import {spielVomStorageLaden, spielInStorageSpeichern} from './actions//ActionCreators';
+
 
 const reducer = combineReducers(reducers);
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
 const store = createStoreWithMiddleware(reducer);
 
+store.dispatch(spielVomStorageLaden());
+
+let oldState=store.getState().doppelkopfspiel;
+
+store.subscribe(() => {
+  let newState=store.getState().doppelkopfspiel;
+  if(oldState!==newState) {
+    oldState=newState;
+
+    store.dispatch(spielInStorageSpeichern());
+  }
+})
 
 var routes = (
     <Router.Route name='main' handler={DoppelkopfApp} path="/">

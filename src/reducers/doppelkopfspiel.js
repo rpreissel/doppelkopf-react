@@ -1,4 +1,4 @@
-import { SPIELER_UMBENENNEN,FUENF_SPIELER_MODUS_AENDERN,SPIEL_ABRECHNEN } from '../constants/ActionTypes';
+import { SPIELER_UMBENENNEN,FUENF_SPIELER_MODUS_AENDERN,SPIEL_ABRECHNEN,SPIEL_AUSTAUSCHEN,SPIEL_ZURUECKSETZEN } from '../constants/ActionTypes';
 import Immutable from 'immutable';
 
 
@@ -10,7 +10,7 @@ const initialState = Immutable.Map({
 
 export default function handle(state, action) {
   if (typeof state === 'undefined') {
-    return _addSpiel(initialState,[0,1],4,5);
+    return initialState;
   }
 
   switch (action.type) {
@@ -20,6 +20,10 @@ export default function handle(state, action) {
       return state.update('spieler', list => list.set(action.spielerId,action.name));
     case FUENF_SPIELER_MODUS_AENDERN:
       return state.set('fuenfSpieler', action.fuenfSpieler);
+    case SPIEL_AUSTAUSCHEN:
+      return action.neuesSpiel;
+    case SPIEL_ZURUECKSETZEN:
+      return initialState;
     default:
       return state;
   }

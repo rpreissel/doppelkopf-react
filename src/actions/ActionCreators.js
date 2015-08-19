@@ -1,4 +1,5 @@
 import ActionTypes from '../constants/ActionTypes';
+import DoppelkopfStorage from '../util/DoppelkopfStorage'
 
 export function spielerUmbenennen(spielerId, name) {
   return {
@@ -21,5 +22,46 @@ export function spielAbrechnen(gewinner,aussetzer,spielwert) {
     gewinner:  gewinner,
     aussetzer: aussetzer,
     spielwert: spielwert
+  };
+}
+
+export function spielAustauschen(neuesSpiel) {
+  return {
+    type:       ActionTypes.SPIEL_AUSTAUSCHEN,
+    neuesSpiel: neuesSpiel
+  }
+}
+
+export function spielZuruecksetzen() {
+  return {
+    type: ActionTypes.SPIEL_ZURUECKSETZEN
+  }
+}
+
+export function spielVomStorageLaden() {
+  return (dispatch, getState) => {
+
+    DoppelkopfStorage.readFromLocalStorage((aktuellesSpiel) => {
+      if(aktuellesSpiel) {
+        dispatch(spielAustauschen(aktuellesSpiel));
+      }
+    });
+  };
+}
+
+export function storageLoeschen() {
+  return (dispatch, getState) => {
+
+    DoppelkopfStorage.deleteLocalStorage(() => {
+      dispatch(spielZuruecksetzen());
+    });
+  };
+}
+
+export function spielInStorageSpeichern() {
+  return (dispatch, getState) => {
+
+    DoppelkopfStorage.saveToLocalStorage(getState().doppelkopfspiel,(success) => {
+    });
   };
 }

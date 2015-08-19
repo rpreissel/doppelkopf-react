@@ -10,47 +10,13 @@ export default class DoppelkopfApp extends React.Component {
 
   constructor(props) {
     super(props);
-
-    //const dataString = localStorage.getItem('data');
-    //if(dataString) {
-    //  let oldState=JSON.parse(dataString);
-    //  oldState.__proto__ = DoppelkopfData.prototype;
-    //  this.state = {data: oldState};
-    //} else {
-    //  this.state = {data: new DoppelkopfData()};
-    //}
-    //
-    //this.clearStorage=this.clearStorage.bind(this);
-  }
-
-  //onStateChanged() {
-  //  this.setState({data: this.state.data});
-  //  localStorage.setItem('data', JSON.stringify(this.state.data));
-  //}
-
-  clearStorage() {
-    //this.setState({data: new DoppelkopfData()});
-    //localStorage.clear();
-
-    this.context.router.transitionTo('main');
   }
 
   render() {
-    const adminTitle = (
-      <h3>Administration</h3>
-    );
-
     return (
       <div className="container-fluid">
         <PageHeader>Doppelkopf-App</PageHeader>
         <RouteHandler/>
-        <Panel header={adminTitle} bsStyle='warning'>
-          <div>
-            <ButtonToolbar>
-              <Button bsStyle='danger' onClick={this.clearStorage}>Storage löschen</Button>
-            </ButtonToolbar>
-          </div>
-        </Panel>
       </div>
     );
   }

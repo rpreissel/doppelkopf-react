@@ -1,10 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router';
-import {Panel} from 'react-bootstrap';
+import {Panel,ButtonToolbar,Button,} from 'react-bootstrap';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actionCreators from '../actions//ActionCreators';
+import * as actionCreators from '../actions/ActionCreators';
 
 import * as DoppelkopfspielStore from '../reducers/doppelkopfspiel';
 
@@ -12,12 +12,15 @@ import * as DoppelkopfspielStore from '../reducers/doppelkopfspiel';
 class Spielerauswahl extends React.Component {
   constructor(props) {
     super(props);
-
   }
+
 
   render() {
     const title = (
       <h3>Spielerauswahl</h3>
+    );
+    const adminTitle = (
+      <h3>Administration</h3>
     );
 
     return (
@@ -45,7 +48,13 @@ class Spielerauswahl extends React.Component {
           <div>
             <Link className="btn btn-primary" to="verlauf">Zum Spiel</Link>
           </div>
-
+        </Panel>
+        <Panel header={adminTitle} bsStyle='warning'>
+          <div>
+            <ButtonToolbar>
+              <Button bsStyle='danger' onClick={this.props.actions.storageLoeschen}>Storage löschen</Button>
+            </ButtonToolbar>
+          </div>
         </Panel>
       </div>
     );
