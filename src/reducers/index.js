@@ -1,2 +1,1 @@
-export { default as players } from './players';
-export { default as games } from './games';
+export { default as doppelkopfspiel } from './doppelkopfspiel';

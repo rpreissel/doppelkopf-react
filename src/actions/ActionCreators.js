@@ -1,23 +1,23 @@
 import ActionTypes from '../constants/ActionTypes';
 
-export function renamePlayer(playerId, name) {
+export function spielerUmbenennen(spielerId, name) {
   return {
-    type:     ActionTypes.RENAME_PLAYER,
-    playerId: playerId,
-    name:     name
+    type:      ActionTypes.SPIELER_UMBENENNEN,
+    spielerId: spielerId,
+    name:      name
   };
 }
 
-export function toggleFivePlayers(fivePlayers) {
+export function fuenfSpielerModusAendern(fuenfSpieler) {
   return {
-    type:        ActionTypes.TOGGLE_FIVE_PLAYERS,
-    fivePlayers: fivePlayers
+    type:         ActionTypes.FUENF_SPIELER_MODUS_AENDERN,
+    fuenfSpieler: fuenfSpieler
   };
 }
 
-export function addSpiel(gewinner,aussetzer,spielwert) {
+export function spielAbrechnen(gewinner,aussetzer,spielwert) {
   return {
-    type:      ActionTypes.ADD_GAME,
+    type:      ActionTypes.SPIEL_ABRECHNEN,
     gewinner:  gewinner,
     aussetzer: aussetzer,
     spielwert: spielwert

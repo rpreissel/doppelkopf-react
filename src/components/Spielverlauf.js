@@ -8,8 +8,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../actions//ActionCreators';
 
-import * as SpieleStore from '../reducers/games';
-import * as PlayersStore from '../reducers/players';
+import * as DoppelkopfspielStore from '../reducers/doppelkopfspiel';
 
 
 class Spielverlauf extends React.Component {
@@ -41,13 +40,13 @@ class Spielverlauf extends React.Component {
 
         <Panel header={eingabeTitle} bsStyle='info'>
           <div>
-            <SpielEingabe spieler={this.props.players} mitAussetzer={this.props.fuenfSpieler} onSpielAbrechnen={this.props.actions.addSpiel}/>
+            <SpielEingabe spieler={this.props.spieler} mitAussetzer={this.props.fuenfSpieler} onSpielAbrechnen={this.props.actions.spielAbrechnen}/>
           </div>
         </Panel>
 
         <Panel header={ergebnisTitle} bsStyle='info'>
           <div>
-            <ErgebnisTabelle players={this.props.players} spiele={this.props.spiele} spielstandForSpielerAndSpiel={this.props.spielstandForSpielerAndSpiel}/>
+            <ErgebnisTabelle spieler={this.props.spieler} spiele={this.props.spiele} spielstandFuerSpielerAndSpiel={this.props.spielstandFuerSpielerAndSpiel}/>
           </div>
         </Panel>
       </div>
@@ -57,10 +56,10 @@ class Spielverlauf extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    players:                      PlayersStore.getPlayers(state.players),
-    spiele:                       state.games.get('results'),
-    fuenfSpieler:                 state.players.get('fuenfSpieler'),
-    spielstandForSpielerAndSpiel: (spielerId, spielIndex) => SpieleStore.getSpielstandForSpielerAndSpiel(state.games,spielerId,spielIndex)
+    spieler:                       DoppelkopfspielStore.getSpieler(state.doppelkopfspiel),
+    spiele:                        state.doppelkopfspiel.get('spiele'),
+    fuenfSpieler:                  state.doppelkopfspiel.get('fuenfSpieler'),
+    spielstandFuerSpielerAndSpiel: (spielerId, spielIndex) => DoppelkopfspielStore.getSpielstandFuerSpielerAndSpiel(state.doppelkopfspiel,spielerId,spielIndex)
   };
 }
 
