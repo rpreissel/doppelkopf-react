@@ -2,15 +2,9 @@ import React from 'react';
 import {Link} from 'react-router';
 import {Table} from 'react-bootstrap';
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as actionCreators from './actions//ActionCreators';
-
-import * as SpieleStore from './reducers/games';
-import * as PlayersStore from './reducers/players';
 
 
-class ErgebnisTabelle extends React.Component {
+export default class ErgebnisTabelle extends React.Component {
   constructor(props) {
     super(props);
 
@@ -42,19 +36,3 @@ class ErgebnisTabelle extends React.Component {
     );
   }
 }
-
-function mapStateToProps(state) {
-  return {
-    players:                      PlayersStore.getPlayers(state.players),
-    spiele:                       state.games.get('results'),
-    spielstandForSpielerAndSpiel: (spielerId, spielIndex) => SpieleStore.getSpielstandForSpielerAndSpiel(state.games,spielerId,spielIndex)
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(actionCreators, dispatch)
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ErgebnisTabelle);

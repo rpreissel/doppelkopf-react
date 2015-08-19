@@ -4,8 +4,15 @@ import {Panel} from 'react-bootstrap';
 import ErgebnisTabelle from './ErgebnisTabelle';
 import SpielEingabe from './SpielEingabe';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actionCreators from './actions//ActionCreators';
 
-export default class Spielverlauf extends React.Component {
+import * as SpieleStore from './reducers/games';
+import * as PlayersStore from './reducers/players';
+
+
+class Spielverlauf extends React.Component {
   constructor(props) {
     super(props);
 
@@ -16,8 +23,7 @@ export default class Spielverlauf extends React.Component {
   }
 
   spielAbrechnen(spiel) {
-    this.props.data.addSpiel(spiel);
-    this.emitStateChanged();
+    this.props.actions.addSpiel(spiel.gewinner,spiel.aussetzer,spiel.spielwert);
   }
 
   render() {
@@ -49,10 +55,26 @@ export default class Spielverlauf extends React.Component {
 
         <Panel header={ergebnisTitle} bsStyle='info'>
           <div>
-            <ErgebnisTabelle/>
+            <ErgebnisTabelle players={this.props.players} spiele={this.props.spiele} spielstandForSpielerAndSpiel={this.props.spielstandForSpielerAndSpiel}/>
           </div>
         </Panel>
       </div>
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    players:                      PlayersStore.getPlayers(state.players),
+    spiele:                       state.games.get('results'),
+    spielstandForSpielerAndSpiel: (spielerId, spielIndex) => SpieleStore.getSpielstandForSpielerAndSpiel(state.games,spielerId,spielIndex)
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actionCreators, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Spielverlauf);
