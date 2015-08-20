@@ -25,3 +25,10 @@ div.row div.btn-toolbar {
 	margin-top: 15px;
 }
 
+.gewinner {
+	color: forestgreen;
+}
+
+.verlierer {
+	color: red;
+}

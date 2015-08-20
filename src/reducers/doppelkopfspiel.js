@@ -39,10 +39,21 @@ export function getSpieler(state) {
 }
 
 export function getSpielstandFuerSpielerAndSpiel(state,spielerId,bisSpiel) {
-  return state.get('spiele').slice(0,bisSpiel+1).reduce((result,spiel) => {
+  const spielwert = state.get('spiele').slice(0,bisSpiel+1).reduce((result,spiel) => {
     return result + spiel.get('punkte').get(spielerId);
   },0);
+
+  const gewinner = state.get('spiele').get(bisSpiel).get('gewinner').indexOf(spielerId)>=0;
+  const aussetzer = state.get('spiele').get(bisSpiel).get('aussetzer') === spielerId;
+
+  return {
+    spielwert: spielwert,
+    gewinner:  gewinner,
+    aussetzer: aussetzer
+  };
 }
+
+
 
 function _addSpiel (state,gewinner,aussetzer,spielwert) {
 
