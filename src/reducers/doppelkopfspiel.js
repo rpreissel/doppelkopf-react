@@ -5,7 +5,9 @@ import Immutable from 'immutable';
 const initialState = Immutable.fromJS({
   spieler:      ['Spieler1','Spieler2','Spieler3','Spieler4','Spieler5'],
   fuenfSpieler: false,
-  spiele:       []
+  spiele:       [],
+  bockrunden1:  0,
+  bockrunden2:  0
 });
 
 export default function handle(state=initialState, action=null) {
@@ -37,6 +39,15 @@ export function getSpieler(state) {
 
   return state.get('spieler').butLast();
 }
+
+export function getDoppelbockSpiele(state) {
+  return state.get('bockrunden2');
+}
+
+export function getBockSpiele(state) {
+  return state.get('bockrunden1')-state.get('bockrunden2');
+}
+
 
 export function getSpielstandFuerSpielerAndSpiel(state,spielerId,bisSpiel) {
   const spielwert = state.get('spiele').slice(0,bisSpiel+1).reduce((result,spiel) => {
@@ -96,15 +107,38 @@ function _addSpiel (state,gewinner,aussetzer,spielwert,bockrunden) {
     }
   }
 
+  let bockrunden1 = state.get('bockrunden1');
+  let bockrunden2 = state.get('bockrunden2');
+
+  let bockmodus=0;
+  if(bockrunden1>0) {
+    bockrunden1--;
+    bockmodus++;
+  }
+
+  if(bockrunden2>0) {
+    bockrunden2--;
+    bockmodus++;
+  }
+
   let neuesSpiel=Immutable.fromJS({
     gewinner:   gewinner,
     aussetzer:  aussetzer,
     spielwert:  spielwert,
     bockrunden: bockrunden,
+    bockmodus:  bockmodus,
     punkte:     punkte
   })
 
-  return state.update('spiele', list => list.push(neuesSpiel));
+  state = state.update('spiele', list => list.push(neuesSpiel));
+
+  let anzahlbockspiele=state.get('fuenfSpieler') ? 5 : 4;
+  for(let i=0;i<bockrunden;i++) {
+    let temp=bockrunden1;
+    bockrunden1=bockrunden2+anzahlbockspiele;
+    bockrunden2=temp;
+  }
+  return state.set('bockrunden1',bockrunden1).set('bockrunden2',bockrunden2);
 }
 
 

@@ -31,7 +31,7 @@ class Spielverlauf extends React.Component {
     );
 
     const eingabeTitle = (
-      <h3>Eingabe</h3>
+      <h3>Eingabe ({this.props.doppelbockspiele} Doppelbock- / {this.props.bockspiele} Bockspiele)</h3>
     );
 
     return (
@@ -65,7 +65,9 @@ function mapStateToProps(state) {
     spiele:                        state.doppelkopfspiel.get('spiele'),
     fuenfSpieler:                  state.doppelkopfspiel.get('fuenfSpieler'),
     spielstandFuerSpielerAndSpiel: (spielerId, spielIndex) => DoppelkopfspielStore.getSpielstandFuerSpielerAndSpiel(state.doppelkopfspiel,spielerId,spielIndex),
-    spieleingabe:                  state.spieleingabe
+    spieleingabe:                  state.spieleingabe,
+    bockspiele:                    DoppelkopfspielStore.getBockSpiele(state.doppelkopfspiel),
+    doppelbockspiele:              DoppelkopfspielStore.getDoppelbockSpiele(state.doppelkopfspiel)
   };
 }
 
