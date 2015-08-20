@@ -8,11 +8,7 @@ const initialState = Immutable.Map({
   spiele:       Immutable.List.of()
 });
 
-export default function handle(state, action) {
-  if (typeof state === 'undefined') {
-    return initialState;
-  }
-
+export default function handle(state=initialState, action=null) {
   switch (action.type) {
     case SPIEL_ABRECHNEN:
       return _addSpiel(state,action.gewinner,action.aussetzer,action.spielwert);

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link,RouteHandler} from 'react-router';
 
-import {PageHeader,ButtonToolbar,Button,Panel} from 'react-bootstrap';
+import {PageHeader} from 'react-bootstrap';
 
 export default class DoppelkopfApp extends React.Component {
   static contextTypes = {
@@ -21,3 +21,4 @@ export default class DoppelkopfApp extends React.Component {
     );
   }
 }
+
