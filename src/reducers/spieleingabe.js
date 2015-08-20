@@ -71,6 +71,8 @@ export default function handle(state=initialStateVierSpieler, action=null) {
 
       return state.set('spielwert',action.spielwert);
 
+    case ActionTypes.LETZTES_SPIEL_AENDERN:
+      return _ersetzeStateDurchLetztesSpiel(state,action.spiel);
     default:
       return state;
   }
@@ -107,4 +109,21 @@ function _updateAussetzerToggleUndAbrechenbarState(state) {
   return state;
 }
 
+function _ersetzeStateDurchLetztesSpiel(state,spiel) {
+  if(!spiel) {
+    return state;
+  }
+
+  const gewinnerArray=spiel.get('gewinner');
+  const gewinnerList=Immutable.Range(0,5).map((v) => gewinnerArray.indexOf(v)>=0).toList();
+
+  const aussetzer=spiel.get('aussetzer');
+  const aussetzerList=Immutable.Range(0,5).map((v) => aussetzer===v).toList();
+
+  state=state.withMutations(map => {
+    map.set('spielwert',spiel.get('spielwert')).set('gewinner',gewinnerList).set('aussetzer',aussetzerList);
+  });
+
+  return _updateAussetzerToggleUndAbrechenbarState(state);
+}
 

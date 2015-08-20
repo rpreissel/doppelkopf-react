@@ -8,5 +8,6 @@ export default keyMirror({
   SPIEL_ABRECHNEN:             null,
   TOGGLE_GEWINNER:             null,
   TOGGLE_AUSSETZER:            null,
+  LETZTES_SPIEL_AENDERN:       null,
   SPIELWERT_AENDERN:           null
 });

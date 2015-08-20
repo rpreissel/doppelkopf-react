@@ -1,4 +1,4 @@
-import { SPIELER_UMBENENNEN,FUENF_SPIELER_MODUS_AENDERN,SPIEL_ABRECHNEN,SPIEL_AUSTAUSCHEN,SPIEL_ZURUECKSETZEN } from '../constants/ActionTypes';
+import * as ActionTypes from '../constants/ActionTypes';
 import Immutable from 'immutable';
 
 
@@ -10,16 +10,21 @@ const initialState = Immutable.fromJS({
 
 export default function handle(state=initialState, action=null) {
   switch (action.type) {
-    case SPIEL_ABRECHNEN:
+    case ActionTypes.SPIEL_ABRECHNEN:
       return _addSpiel(state,action.gewinner,action.aussetzer,action.spielwert);
-    case SPIELER_UMBENENNEN:
+    case ActionTypes.SPIELER_UMBENENNEN:
       return state.update('spieler', list => list.set(action.spielerId,action.name));
-    case FUENF_SPIELER_MODUS_AENDERN:
+    case ActionTypes.FUENF_SPIELER_MODUS_AENDERN:
       return state.set('fuenfSpieler', action.fuenfSpieler);
-    case SPIEL_AUSTAUSCHEN:
+    case ActionTypes.SPIEL_AUSTAUSCHEN:
       return action.neuesSpiel;
-    case SPIEL_ZURUECKSETZEN:
+    case ActionTypes.SPIEL_ZURUECKSETZEN:
       return initialState;
+    case ActionTypes.LETZTES_SPIEL_AENDERN:
+      if(state.get('spiele').last() === action.spiel) {
+        return state.update('spiele', list => list.butLast());
+      }
+      return state;
     default:
       return state;
   }
@@ -80,11 +85,11 @@ function _addSpiel (state,gewinner,aussetzer,spielwert) {
     }
   }
 
-  let neuesSpiel=Immutable.Map({
+  let neuesSpiel=Immutable.fromJS({
     gewinner:  gewinner,
     aussetzer: aussetzer,
     spielwert: spielwert,
-    punkte:    Immutable.List(punkte)
+    punkte:    punkte
   })
 
   return state.update('spiele', list => list.push(neuesSpiel));

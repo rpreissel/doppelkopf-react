@@ -1,17 +1,21 @@
 import React from 'react';
 import {Link} from 'react-router';
-import {Panel} from 'react-bootstrap';
+import {Panel,ButtonToolbar,Button} from 'react-bootstrap';
 import ErgebnisTabelle from './ErgebnisTabelle';
 import SpielEingabe from './SpielEingabe';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actionCreators from '../actions//ActionCreators';
+import * as actionCreators from '../actions/ActionCreators';
 
 import * as DoppelkopfspielStore from '../reducers/doppelkopfspiel';
 
 
 class Spielverlauf extends React.Component {
+  static contextTypes = {
+    router: React.PropTypes.any.isRequired
+  };
+
   constructor(props) {
     super(props);
 
@@ -33,9 +37,10 @@ class Spielverlauf extends React.Component {
     return (
       <div>
         <Panel header={aktionTitle} bsStyle='info'>
-          <div>
-            <Link className="btn btn-primary" to="main">Spieler ändern</Link>
-          </div>
+          <ButtonToolbar>
+            <Button bsStyle='primary' disabled={!this.props.spiele.count()>0} onClick={() => this.props.actions.letztesSpielAendern(this.props.spiele.last())}>Letztes Spiel ändern</Button>
+            <Button bsStyle='primary' disabled={!this.props.spiele.count()>0} onClick={() => this.context.router.transitionTo('main')}>Einstellungen</Button>
+          </ButtonToolbar>
         </Panel>
 
         <Panel header={eingabeTitle} bsStyle='info'>

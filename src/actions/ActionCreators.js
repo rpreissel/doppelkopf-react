@@ -86,3 +86,10 @@ export function spielwertAendern(spielwert) {
     spielwert: spielwert
   };
 }
+
+export function letztesSpielAendern(spiel) {
+  return {
+    type:  ActionTypes.LETZTES_SPIEL_AENDERN,
+    spiel: spiel
+  };
+}
