@@ -2,10 +2,10 @@ import { SPIELER_UMBENENNEN,FUENF_SPIELER_MODUS_AENDERN,SPIEL_ABRECHNEN,SPIEL_AU
 import Immutable from 'immutable';
 
 
-const initialState = Immutable.Map({
-  spieler:      Immutable.List.of('Spieler1','Spieler2','Spieler3','Spieler4','Spieler5'),
+const initialState = Immutable.fromJS({
+  spieler:      ['Spieler1','Spieler2','Spieler3','Spieler4','Spieler5'],
   fuenfSpieler: false,
-  spiele:       Immutable.List.of()
+  spiele:       []
 });
 
 export default function handle(state=initialState, action=null) {

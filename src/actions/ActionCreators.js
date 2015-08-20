@@ -65,3 +65,24 @@ export function spielInStorageSpeichern() {
     });
   };
 }
+
+export function toggleGewinner(gewinner) {
+  return {
+    type:     ActionTypes.TOGGLE_GEWINNER,
+    gewinner: gewinner
+  };
+}
+
+export function toggleAussetzer(aussetzer) {
+  return {
+    type:      ActionTypes.TOGGLE_AUSSETZER,
+    aussetzer: aussetzer
+  };
+}
+
+export function spielwertAendern(spielwert) {
+  return {
+    type:      ActionTypes.SPIELWERT_AENDERN,
+    spielwert: spielwert
+  };
+}

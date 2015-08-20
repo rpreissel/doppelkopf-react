@@ -5,5 +5,8 @@ export default keyMirror({
   SPIEL_ZURUECKSETZEN:         null,
   SPIELER_UMBENENNEN:          null,
   FUENF_SPIELER_MODUS_AENDERN: null,
-  SPIEL_ABRECHNEN:             null
+  SPIEL_ABRECHNEN:             null,
+  TOGGLE_GEWINNER:             null,
+  TOGGLE_AUSSETZER:            null,
+  SPIELWERT_AENDERN:           null
 });

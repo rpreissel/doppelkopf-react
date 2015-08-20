@@ -1,65 +1,25 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {ButtonToolbar,Button} from 'react-bootstrap';
+import * as SpieleingabeStore from '../reducers/spieleingabe';
 
 
 export default class SpielEingabe extends React.Component {
   constructor(props) {
     super(props);
-    this.state = this.createEmptyState();
   }
 
-
-  createEmptyState() {
-    return {gewinner: ([]), aussetzer: (-1), spielwert: (0)};
-  }
-
-  toggleSpielerGewinner(spielerId) {
-    const gewinnerIndex = this.state.gewinner.indexOf(spielerId);
-    if (gewinnerIndex < 0) {
-      this.state.gewinner.push(spielerId);
-      if (this.state.aussetzer === spielerId) {
-        this.state.aussetzer = -1;
-        this.setState({aussetzer: this.state.aussetzer});
-      }
-    } else {
-      this.state.gewinner.splice(gewinnerIndex, 1);
-    }
-    this.setState({gewinner: this.state.gewinner});
-  }
-
-  toggleSpielerAussetzer(spielerId) {
-    if (this.state.aussetzer < 0 || this.state.aussetzer !== spielerId) {
-      this.state.aussetzer = spielerId;
-    } else {
-      this.state.aussetzer = -1;
-    }
-    this.setState({aussetzer: this.state.aussetzer});
-  }
 
   spielerWertChanged(neuerWert) {
-    let newValue=parseInt(neuerWert,10);
-    if(newValue!==NaN && newValue>=0) {
-      this.setState({spielwert: newValue});
+    const newValue=parseInt(neuerWert,10);
+    if(newValue!==NaN) {
+      this.props.actions.spielwertAendern(neuerWert);
     }
   }
 
   spielAbrechnen() {
-    this.props.onSpielAbrechnen(this.state.gewinner,this.state.aussetzer,this.state.spielwert);
-
-    this.setState(this.createEmptyState());
-  }
-
-  spielAbrechenbar() {
-    if(this.state.gewinner.length === 0) {
-      return false;
-    }
-
-    if(this.props.mitAussetzer && this.state.aussetzer<0) {
-      return false;
-    }
-
-    return true;
+    const spieleingabe=this.props.spieleingabe;
+    this.props.actions.spielAbrechnen(SpieleingabeStore.getGewinner(spieleingabe), SpieleingabeStore.getAussetzer(spieleingabe), spieleingabe.get('spielwert'));
   }
 
   render() {
@@ -67,27 +27,23 @@ export default class SpielEingabe extends React.Component {
       <label>Gewinner</label>
       <ButtonToolbar>
         {this.props.spieler.map((spielerName, spielerId) => {
-          const isGewinner = this.state.gewinner.indexOf(spielerId) >= 0;
-          const toggleBar = isGewinner || this.state.gewinner.length <3;
+          const isGewinner = this.props.spieleingabe.get('gewinner').get(spielerId);
+          const toggleBar = this.props.spieleingabe.get('toggleGewinner').get(spielerId);
           return (<Button key={spielerId} bsStyle={isGewinner ? 'primary' : 'default'} disabled={!toggleBar}
-                          onClick={() => this.toggleSpielerGewinner(spielerId)}>{spielerName}</Button>);
+                          onClick={() => this.props.actions.toggleGewinner(spielerId)}>{spielerName}</Button>);
         })}
       </ButtonToolbar>
     </div>;
 
-    let aussetzerButtons = this.props.mitAussetzer ? <div className="form-group">
+    let aussetzerButtons = this.props.spieleingabe.get('fuenfSpieler') ? <div className="form-group">
       <label>Aussetzer</label>
       <ButtonToolbar>
         {this.props.spieler
           .map((spielerName, spielerId) => {
-            const isGewinner = this.state.gewinner.indexOf(spielerId) >= 0;
-            const isAussetzer = this.state.aussetzer === spielerId;
-            if (isGewinner) {
-              return (<Button key={spielerId} bsStyle={'default'} disabled={true}>{spielerName}</Button>);
-            }
-
-            return (<Button key={spielerId} bsStyle={isAussetzer ? 'primary' : 'default'}
-                            onClick={() => this.toggleSpielerAussetzer(spielerId)}>{spielerName}</Button>);
+            const isAussetzer = this.props.spieleingabe.get('aussetzer').get(spielerId);
+            const toggleBar = this.props.spieleingabe.get('toggleAussetzer').get(spielerId);
+            return (<Button key={spielerId} bsStyle={isAussetzer ? 'primary' : 'default'}  disabled={!toggleBar}
+                            onClick={() => this.props.actions.toggleAussetzer(spielerId)}>{spielerName}</Button>);
           })}
       </ButtonToolbar>
     </div> : null;
@@ -101,7 +57,7 @@ export default class SpielEingabe extends React.Component {
 
           <div className="row">
             <div className="col-sm-2">
-              <input className="text-right" type="text" value={this.state.spielwert}
+              <input className="text-right" type="text" value={this.props.spieleingabe.get('spielwert')}
                      onChange={(event) => this.spielerWertChanged(event.target.value)}/>
             </div>
           </div>
@@ -115,7 +71,7 @@ export default class SpielEingabe extends React.Component {
         </div>
         <div>
           <ButtonToolbar>
-            <Button bsStyle='primary' disabled={!this.spielAbrechenbar()} onClick={()=> this.spielAbrechnen()}>Spiel abrechnen</Button>
+            <Button bsStyle='primary' disabled={!this.props.spieleingabe.get('abrechenbar')} onClick={()=> this.spielAbrechnen()}>Spiel abrechnen</Button>
           </ButtonToolbar>
         </div>
       </div>

@@ -40,7 +40,7 @@ class Spielverlauf extends React.Component {
 
         <Panel header={eingabeTitle} bsStyle='info'>
           <div>
-            <SpielEingabe spieler={this.props.spieler} mitAussetzer={this.props.fuenfSpieler} onSpielAbrechnen={this.props.actions.spielAbrechnen}/>
+            <SpielEingabe spieler={this.props.spieler} spieleingabe={this.props.spieleingabe} actions={this.props.actions}/>
           </div>
         </Panel>
 
@@ -59,7 +59,8 @@ function mapStateToProps(state) {
     spieler:                       DoppelkopfspielStore.getSpieler(state.doppelkopfspiel),
     spiele:                        state.doppelkopfspiel.get('spiele'),
     fuenfSpieler:                  state.doppelkopfspiel.get('fuenfSpieler'),
-    spielstandFuerSpielerAndSpiel: (spielerId, spielIndex) => DoppelkopfspielStore.getSpielstandFuerSpielerAndSpiel(state.doppelkopfspiel,spielerId,spielIndex)
+    spielstandFuerSpielerAndSpiel: (spielerId, spielIndex) => DoppelkopfspielStore.getSpielstandFuerSpielerAndSpiel(state.doppelkopfspiel,spielerId,spielIndex),
+    spieleingabe:                  state.spieleingabe
   };
 }
 
