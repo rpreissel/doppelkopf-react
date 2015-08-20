@@ -9,7 +9,8 @@ const initialStateVierSpieler = Immutable.fromJS({
   toggleAussetzer: [false,false,false,false,false],
   spielwert:       0,
   abrechenbar:     false,
-  fuenfSpieler:    false
+  fuenfSpieler:    false,
+  bockrunden:      0
 });
 
 const initialStateFuenfSpieler = Immutable.fromJS({
@@ -19,7 +20,8 @@ const initialStateFuenfSpieler = Immutable.fromJS({
   toggleAussetzer: [true,true,true,true,true],
   spielwert:       0,
   abrechenbar:     false,
-  fuenfSpieler:    true
+  fuenfSpieler:    true,
+  bockrunden:      0
 });
 
 export default function handle(state=initialStateVierSpieler, action=null) {
@@ -70,7 +72,10 @@ export default function handle(state=initialStateVierSpieler, action=null) {
       }
 
       return state.set('spielwert',action.spielwert);
-
+    case ActionTypes.BOCKRUNDE_HINZUFUEGEN:
+      return state.update('bockrunden', runden => runden ? runden + 1 : 1);
+    case ActionTypes.BOCKRUNDEN_LOESCHEN:
+      return state.set('bockrunden',0);
     case ActionTypes.LETZTES_SPIEL_AENDERN:
       return _ersetzeStateDurchLetztesSpiel(state,action.spiel);
     default:
@@ -121,7 +126,8 @@ function _ersetzeStateDurchLetztesSpiel(state,spiel) {
   const aussetzerList=Immutable.Range(0,5).map((v) => aussetzer===v).toList();
 
   state=state.withMutations(map => {
-    map.set('spielwert',spiel.get('spielwert')).set('gewinner',gewinnerList).set('aussetzer',aussetzerList);
+    map.set('spielwert',spiel.get('spielwert')).set('gewinner',gewinnerList)
+       .set('aussetzer',aussetzerList).set('bockrunden',spiel.get('bockrunden'));
   });
 
   return _updateAussetzerToggleUndAbrechenbarState(state);

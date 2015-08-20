@@ -16,12 +16,13 @@ export function fuenfSpielerModusAendern(fuenfSpieler) {
   };
 }
 
-export function spielAbrechnen(gewinner,aussetzer,spielwert) {
+export function spielAbrechnen(gewinner,aussetzer,spielwert,bockrunden) {
   return {
-    type:      ActionTypes.SPIEL_ABRECHNEN,
-    gewinner:  gewinner,
-    aussetzer: aussetzer,
-    spielwert: spielwert
+    type:       ActionTypes.SPIEL_ABRECHNEN,
+    gewinner:   gewinner,
+    aussetzer:  aussetzer,
+    spielwert:  spielwert,
+    bockrunden: bockrunden
   };
 }
 
@@ -91,5 +92,17 @@ export function letztesSpielAendern(spiel) {
   return {
     type:  ActionTypes.LETZTES_SPIEL_AENDERN,
     spiel: spiel
+  };
+}
+
+export function bockrundeHinzufuegen() {
+  return {
+    type: ActionTypes.BOCKRUNDE_HINZUFUEGEN
+  };
+}
+
+export function bockrundenLoeschen() {
+  return {
+    type: ActionTypes.BOCKRUNDEN_LOESCHEN
   };
 }

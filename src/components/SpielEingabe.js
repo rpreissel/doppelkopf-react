@@ -19,7 +19,7 @@ export default class SpielEingabe extends React.Component {
 
   spielAbrechnen() {
     const spieleingabe=this.props.spieleingabe;
-    this.props.actions.spielAbrechnen(SpieleingabeStore.getGewinner(spieleingabe), SpieleingabeStore.getAussetzer(spieleingabe), spieleingabe.get('spielwert'));
+    this.props.actions.spielAbrechnen(SpieleingabeStore.getGewinner(spieleingabe), SpieleingabeStore.getAussetzer(spieleingabe), spieleingabe.get('spielwert'), spieleingabe.get('bockrunden'));
   }
 
   render() {
@@ -48,10 +48,27 @@ export default class SpielEingabe extends React.Component {
       </ButtonToolbar>
     </div> : null;
 
+    let bockrunden = null;
+    switch (this.props.spieleingabe.get('bockrunden')) {
+      case 0:
+        bockrunden = 'Keine Bockrunde';
+      case 1:
+        bockrunden = '1 Bockrunde';
+      default:
+        bockrunden = this.props.spieleingabe.get('bockrunden') + ' Bockrunden';
+    }
+
     return (
       <div>
         {gewinnerButtons}
         {aussetzerButtons}
+        <div className="form-group">
+          <label className="">Bockrunden</label>
+          <ButtonToolbar>
+            <Button bsStyle='default' onClick={this.props.actions.bockrundeHinzufuegen}>{bockrunden}</Button>
+            <Button bsStyle='default' onClick={this.props.actions.bockrundenLoeschen}>Bockrunden zurücksetzen</Button>
+          </ButtonToolbar>
+        </div>
         <div className="form-group">
           <label className="">Spielwert</label>
 

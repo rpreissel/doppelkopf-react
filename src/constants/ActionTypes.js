@@ -9,5 +9,7 @@ export default keyMirror({
   TOGGLE_GEWINNER:             null,
   TOGGLE_AUSSETZER:            null,
   LETZTES_SPIEL_AENDERN:       null,
-  SPIELWERT_AENDERN:           null
+  SPIELWERT_AENDERN:           null,
+  BOCKRUNDE_HINZUFUEGEN:       null,
+  BOCKRUNDEN_LOESCHEN:         null
 });

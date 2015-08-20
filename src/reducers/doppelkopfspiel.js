@@ -11,13 +11,13 @@ const initialState = Immutable.fromJS({
 export default function handle(state=initialState, action=null) {
   switch (action.type) {
     case ActionTypes.SPIEL_ABRECHNEN:
-      return _addSpiel(state,action.gewinner,action.aussetzer,action.spielwert);
+      return _addSpiel(state,action.gewinner,action.aussetzer,action.spielwert,action.bockrunden);
     case ActionTypes.SPIELER_UMBENENNEN:
       return state.update('spieler', list => list.set(action.spielerId,action.name));
     case ActionTypes.FUENF_SPIELER_MODUS_AENDERN:
       return state.set('fuenfSpieler', action.fuenfSpieler);
     case ActionTypes.SPIEL_AUSTAUSCHEN:
-      return action.neuesSpiel;
+      return initialState.merge(action.neuesSpiel);
     case ActionTypes.SPIEL_ZURUECKSETZEN:
       return initialState;
     case ActionTypes.LETZTES_SPIEL_AENDERN:
@@ -55,7 +55,7 @@ export function getSpielstandFuerSpielerAndSpiel(state,spielerId,bisSpiel) {
 
 
 
-function _addSpiel (state,gewinner,aussetzer,spielwert) {
+function _addSpiel (state,gewinner,aussetzer,spielwert,bockrunden) {
 
   let punkte=[0,0,0,0,0];
 
@@ -97,10 +97,11 @@ function _addSpiel (state,gewinner,aussetzer,spielwert) {
   }
 
   let neuesSpiel=Immutable.fromJS({
-    gewinner:  gewinner,
-    aussetzer: aussetzer,
-    spielwert: spielwert,
-    punkte:    punkte
+    gewinner:   gewinner,
+    aussetzer:  aussetzer,
+    spielwert:  spielwert,
+    bockrunden: bockrunden,
+    punkte:     punkte
   })
 
   return state.update('spiele', list => list.push(neuesSpiel));
