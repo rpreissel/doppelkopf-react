@@ -23,10 +23,7 @@ export default function handle(state=initialState, action=null) {
     case ActionTypes.SPIEL_ZURUECKSETZEN:
       return initialState;
     case ActionTypes.LETZTES_SPIEL_AENDERN:
-      if(state.get('spiele').last() === action.spiel) {
-        return state.update('spiele', list => list.butLast());
-      }
-      return state;
+      return _letztesSpielZuruecknehmen(state,action.spiel);
     default:
       return state;
   }
@@ -141,5 +138,39 @@ function _addSpiel (state,gewinner,aussetzer,spielwert,bockrunden) {
   return state.set('bockrunden1',bockrunden1).set('bockrunden2',bockrunden2);
 }
 
+function _letztesSpielZuruecknehmen(state,spiel) {
+  if(state.get('spiele').last() !== spiel) {
+    return state;
+  }
+
+  let bockrunden1 = state.get('bockrunden1');
+  let bockrunden2 = state.get('bockrunden2');
+  let bockrunden=spiel.get('bockrunden');
+
+  let anzahlbockspiele=state.get('fuenfSpieler') ? 5 : 4;
+  for(let i=0;i<bockrunden;i++) {
+    let temp=bockrunden2;
+    bockrunden2=bockrunden1-anzahlbockspiele;
+    bockrunden1=temp;
+  }
+
+  switch(spiel.get('bockmodus')) {
+    case 0:
+      break;
+    case 1:
+      bockrunden1++;
+      break;
+    case 2:
+      bockrunden1++;
+      bockrunden2++;
+      break;
+  }
+
+  return state.withMutations(map => {
+    map.set('bockrunden1',bockrunden1);
+    map.set('bockrunden2',bockrunden2);
+    map.update('spiele', list => list.butLast());
+  })
+}
 
 
