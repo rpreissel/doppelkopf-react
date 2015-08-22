@@ -34,6 +34,8 @@ class Spielverlauf extends React.Component {
       <h3>Eingabe ({this.props.doppelbockspiele} Doppelbock- / {this.props.bockspiele} Bockspiele)</h3>
     );
 
+    const eingabeStyle=this.props.doppelbockspiele>0 ? 'danger' : (this.props.bockspiele>0 ? 'success' : 'info');
+
     return (
       <div>
         <Panel header={aktionTitle} bsStyle='info'>
@@ -43,7 +45,7 @@ class Spielverlauf extends React.Component {
           </ButtonToolbar>
         </Panel>
 
-        <Panel header={eingabeTitle} bsStyle='info'>
+        <Panel header={eingabeTitle} bsStyle={eingabeStyle}>
           <div>
             <SpielEingabe spieler={this.props.spieler} spieleingabe={this.props.spieleingabe} actions={this.props.actions}/>
           </div>
