@@ -41,7 +41,7 @@ class Spielverlauf extends React.Component {
         <Panel header={aktionTitle} bsStyle='info'>
           <ButtonToolbar>
             <Button bsStyle='primary' disabled={!this.props.spiele.count()>0} onClick={() => this.props.actions.letztesSpielAendern(this.props.spiele.last())}>Letztes Spiel ändern</Button>
-            <Button bsStyle='primary' disabled={!this.props.spiele.count()>0} onClick={() => this.context.router.transitionTo('main')}>Einstellungen</Button>
+            <Button bsStyle='primary' onClick={() => this.context.router.transitionTo('main')}>Einstellungen</Button>
           </ButtonToolbar>
         </Panel>
 
