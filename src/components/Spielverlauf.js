@@ -30,9 +30,19 @@ class Spielverlauf extends React.Component {
       <h3>Aktionen</h3>
     );
 
-    const eingabeTitle = (
-      <h3>Eingabe ({this.props.doppelbockspiele} Doppelbock- / {this.props.bockspiele} Bockspiele)</h3>
+    let eingabeTitle = (
+      <h3>Eingabe</h3>
     );
+
+    if(this.props.doppelbockspiele>0) {
+      eingabeTitle = (
+        <h3>Eingabe ({this.props.doppelbockspiele} Doppelbock- / {this.props.bockspiele} Bockspiele)</h3>
+      );
+    } else if (this.props.bockspiele>0) {
+      eingabeTitle = (
+        <h3>Eingabe ({this.props.bockspiele} Bockspiele)</h3>
+      );
+    }
 
     const eingabeStyle=this.props.doppelbockspiele>0 ? 'danger' : (this.props.bockspiele>0 ? 'success' : 'info');
 
