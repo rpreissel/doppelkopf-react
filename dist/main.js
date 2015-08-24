@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "73278d4ca237a1813d57"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "a76eac3326b1a704785b"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -713,12 +713,7 @@
 	    case ActionTypes.SPIEL_ZURUECKSETZEN:
 	      return initialState;
 	    case ActionTypes.LETZTES_SPIEL_AENDERN:
-	      if (state.get('spiele').last() === action.spiel) {
-	        return state.update('spiele', function (list) {
-	          return list.butLast();
-	        });
-	      }
-	      return state;
+	      return _letztesSpielZuruecknehmen(state, action.spiel);
 	    default:
 	      return state;
 	  }
@@ -829,6 +824,43 @@
 	    bockrunden2 = temp;
 	  }
 	  return state.set('bockrunden1', bockrunden1).set('bockrunden2', bockrunden2);
+	}
+	
+	function _letztesSpielZuruecknehmen(state, spiel) {
+	  if (state.get('spiele').last() !== spiel) {
+	    return state;
+	  }
+	
+	  var bockrunden1 = state.get('bockrunden1');
+	  var bockrunden2 = state.get('bockrunden2');
+	  var bockrunden = spiel.get('bockrunden');
+	
+	  var anzahlbockspiele = state.get('fuenfSpieler') ? 5 : 4;
+	  for (var i = 0; i < bockrunden; i++) {
+	    var temp = bockrunden2;
+	    bockrunden2 = bockrunden1 - anzahlbockspiele;
+	    bockrunden1 = temp;
+	  }
+	
+	  switch (spiel.get('bockmodus')) {
+	    case 0:
+	      break;
+	    case 1:
+	      bockrunden1++;
+	      break;
+	    case 2:
+	      bockrunden1++;
+	      bockrunden2++;
+	      break;
+	  }
+	
+	  return state.withMutations(function (map) {
+	    map.set('bockrunden1', bockrunden1);
+	    map.set('bockrunden2', bockrunden2);
+	    map.update('spiele', function (list) {
+	      return list.butLast();
+	    });
+	  });
 	}
 
 /***/ },
@@ -42952,6 +42984,8 @@
 	        ' Bockspiele)'
 	      );
 	
+	      var eingabeStyle = this.props.doppelbockspiele > 0 ? 'danger' : this.props.bockspiele > 0 ? 'success' : 'info';
+	
 	      return _react2['default'].createElement(
 	        'div',
 	        null,
@@ -42970,7 +43004,7 @@
 	            ),
 	            _react2['default'].createElement(
 	              _reactBootstrap.Button,
-	              { bsStyle: 'primary', disabled: !this.props.spiele.count() > 0, onClick: function () {
+	              { bsStyle: 'primary', onClick: function () {
 	                  return _this.context.router.transitionTo('main');
 	                } },
 	              'Einstellungen'
@@ -42979,7 +43013,7 @@
 	        ),
 	        _react2['default'].createElement(
 	          _reactBootstrap.Panel,
-	          { header: eingabeTitle, bsStyle: 'info' },
+	          { header: eingabeTitle, bsStyle: eingabeStyle },
 	          _react2['default'].createElement(
 	            'div',
 	            null,
