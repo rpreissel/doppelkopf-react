@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "a76eac3326b1a704785b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "94c822eb9aafb59633da"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -42977,12 +42977,28 @@
 	      var eingabeTitle = _react2['default'].createElement(
 	        'h3',
 	        null,
-	        'Eingabe (',
-	        this.props.doppelbockspiele,
-	        ' Doppelbock- / ',
-	        this.props.bockspiele,
-	        ' Bockspiele)'
+	        'Eingabe'
 	      );
+	
+	      if (this.props.doppelbockspiele > 0) {
+	        eingabeTitle = _react2['default'].createElement(
+	          'h3',
+	          null,
+	          'Eingabe (',
+	          this.props.doppelbockspiele,
+	          ' Doppelbock- / ',
+	          this.props.bockspiele,
+	          ' Bockspiele)'
+	        );
+	      } else if (this.props.bockspiele > 0) {
+	        eingabeTitle = _react2['default'].createElement(
+	          'h3',
+	          null,
+	          'Eingabe (',
+	          this.props.bockspiele,
+	          ' Bockspiele)'
+	        );
+	      }
 	
 	      var eingabeStyle = this.props.doppelbockspiele > 0 ? 'danger' : this.props.bockspiele > 0 ? 'success' : 'info';
 	
