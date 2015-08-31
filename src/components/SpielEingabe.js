@@ -13,7 +13,7 @@ export default class SpielEingabe extends React.Component {
   spielerWertChanged(neuerWert) {
     const newValue=parseInt(neuerWert,10);
     if(newValue!==NaN) {
-      this.props.actions.spielwertAendern(neuerWert);
+      this.props.actions.spielwertAendern(newValue);
     }
   }
 
