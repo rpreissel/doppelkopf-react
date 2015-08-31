@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "94c822eb9aafb59633da"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "2d5b4972d9cd39da756c"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -43223,7 +43223,7 @@
 	    value: function spielerWertChanged(neuerWert) {
 	      var newValue = parseInt(neuerWert, 10);
 	      if (newValue !== NaN) {
-	        this.props.actions.spielwertAendern(neuerWert);
+	        this.props.actions.spielwertAendern(newValue);
 	      }
 	    }
 	  }, {
